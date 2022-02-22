@@ -1,6 +1,7 @@
 #include "lvgl/lvgl.h"
 #include "lv_drivers/display/fbdev.h"
 #include "lv_drivers/indev/evdev.h"
+#include "lvgl/examples/lv_examples.h"
 #include "evdev_mouse.h"
 //#include "lv_examples/lv_examples.h"
 #include "lv_demos/lv_demo.h"
@@ -138,22 +139,29 @@ int main(void)
 	//lv_demo_keypad_encoder();
 	//lv_demo_printer();
 	//lv_demo_stress();
-	lv_demo_music();
+	//lv_demo_music();
 	//lv_ex_get_started_1();
 	//lv_ex_get_started_2();
 	//lv_ex_get_started_3();
 
-	//lv_ex_style_1();
-	//lv_ex_style_2();
-	//lv_ex_style_3();
-	//lv_ex_style_4();
-	//lv_ex_style_5();
-	//lv_ex_style_6();
-	//lv_ex_style_7();
-	//lv_ex_style_8();
-	//lv_ex_style_9();
-	//lv_ex_style_10();
-	//lv_ex_style_11();
+	//lv_example_style_1();
+	//lv_example_style_2();
+	//lv_example_style_3();
+	//lv_example_style_4();
+	//lv_example_style_5();
+	//lv_example_style_6();
+	//lv_example_style_7();
+	//lv_example_style_8();
+	//lv_example_style_9();
+	//lv_example_style_10();
+	//lv_example_style_11();
+
+	//lv_example_colorwheel_1();
+
+	//lv_example_meter_1();
+	//lv_example_meter_2();
+	lv_example_meter_3();
+	//lv_example_meter_4();
 
 	while (1)
 	{
