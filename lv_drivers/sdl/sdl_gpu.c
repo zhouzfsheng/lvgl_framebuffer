@@ -37,8 +37,6 @@
 /*********************
  *      DEFINES
  *********************/
-#define SDL_REFR_PERIOD     50  /*ms*/
-
 #ifndef KEYBOARD_BUFFER_SIZE
 #define KEYBOARD_BUFFER_SIZE SDL_TEXTINPUTEVENT_TEXT_SIZE
 #endif
@@ -81,7 +79,6 @@ monitor_t monitor;
 monitor_t monitor2;
 #endif
 
-static volatile bool sdl_inited = false;
 static volatile bool sdl_quit_qry = false;
 
 static bool left_button_down = false;
@@ -117,8 +114,6 @@ void sdl_init(void)
     SDL_SetWindowPosition(monitor2.window, x - (SDL_HOR_RES * SDL_ZOOM) / 2 - 10, y);
 #endif
 
-    sdl_inited = true;
-
     SDL_StartTextInput();
 
     /* Tick init.
@@ -142,9 +137,9 @@ void sdl_gpu_disp_drv_init(lv_disp_drv_t *driver)
 
 /**
  * Flush a buffer to the marked area
- * @param drv pointer to driver where this function belongs
+ * @param disp_drv pointer to driver where this function belongs
  * @param area an area where to copy `color_p`
- * @param color_p an array of pixel to copy to the `area` part of the screen
+ * @param color_p an array of pixels to copy to the `area` part of the screen
  */
 void sdl_display_flush(lv_disp_drv_t * disp_drv, const lv_area_t * area, lv_color_t * color_p)
 {
@@ -177,9 +172,9 @@ void sdl_display_flush(lv_disp_drv_t * disp_drv, const lv_area_t * area, lv_colo
 
 /**
  * Flush a buffer to the marked area
- * @param drv pointer to driver where this function belongs
+ * @param disp_drv pointer to driver where this function belongs
  * @param area an area where to copy `color_p`
- * @param color_p an array of pixel to copy to the `area` part of the screen
+ * @param color_p an array of pixels to copy to the `area` part of the screen
  */
 void sdl_display_flush2(lv_disp_drv_t * disp_drv, const lv_area_t * area, lv_color_t * color_p)
 {

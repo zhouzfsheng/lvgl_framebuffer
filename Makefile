@@ -23,7 +23,7 @@ MAINSRC = $(LVGL_DIR)/main.c
 include $(LVGL_DIR)/lvgl/lvgl.mk
 include $(LVGL_DIR)/lv_drivers/lv_drivers.mk
 #include $(LVGL_DIR)/lv_examples/lv_examples.mk
-include $(LVGL_DIR)/lv_demos/lv_demo.mk
+#include $(LVGL_DIR)/lv_demos/lv_demo.mk
 
 CSRCS += $(LVGL_DIR)/mouse_cursor_icon.c
 CSRCS += $(LVGL_DIR)/evdev_mouse.c

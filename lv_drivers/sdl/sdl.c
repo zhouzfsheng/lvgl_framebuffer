@@ -55,8 +55,6 @@
 /*********************
  *      DEFINES
  *********************/
-#define SDL_REFR_PERIOD     50  /*ms*/
-
 #ifndef KEYBOARD_BUFFER_SIZE
 #define KEYBOARD_BUFFER_SIZE SDL_TEXTINPUTEVENT_TEXT_SIZE
 #endif
@@ -89,7 +87,10 @@ static void mouse_handler(SDL_Event * event);
 static void mousewheel_handler(SDL_Event * event);
 static uint32_t keycode_to_ctrl_key(SDL_Keycode sdl_key);
 static void keyboard_handler(SDL_Event * event);
+
+#if LV_TICK_CUSTOM == 0
 static int tick_thread(void *data);
+#endif
 
 /***********************
  *   GLOBAL PROTOTYPES
@@ -104,7 +105,6 @@ monitor_t monitor;
 monitor_t monitor2;
 #endif
 
-static volatile bool sdl_inited = false;
 static volatile bool sdl_quit_qry = false;
 
 static bool left_button_down = false;
@@ -140,23 +140,22 @@ void sdl_init(void)
     SDL_SetWindowPosition(monitor2.window, x - (SDL_HOR_RES * SDL_ZOOM) / 2 - 10, y);
 #endif
 
-    sdl_inited = true;
-
     SDL_StartTextInput();
 
+#if LV_TICK_CUSTOM == 0
     /* Tick init.
      * You have to call 'lv_tick_inc()' in periodically to inform LittelvGL about
      * how much time were elapsed Create an SDL thread to do this*/
     SDL_CreateThread(tick_thread, "tick", NULL);
-
+#endif
     lv_timer_create(sdl_event_handler, 10, NULL);
 }
 
 /**
  * Flush a buffer to the marked area
- * @param drv pointer to driver where this function belongs
+ * @param disp_drv pointer to driver where this function belongs
  * @param area an area where to copy `color_p`
- * @param color_p an array of pixel to copy to the `area` part of the screen
+ * @param color_p an array of pixels to copy to the `area` part of the screen
  */
 void sdl_display_flush(lv_disp_drv_t * disp_drv, const lv_area_t * area, lv_color_t * color_p)
 {
@@ -212,9 +211,9 @@ void sdl_display_flush(lv_disp_drv_t * disp_drv, const lv_area_t * area, lv_colo
 
 /**
  * Flush a buffer to the marked area
- * @param drv pointer to driver where this function belongs
+ * @param disp_drv pointer to driver where this function belongs
  * @param area an area where to copy `color_p`
- * @param color_p an array of pixel to copy to the `area` part of the screen
+ * @param color_p an array of pixels to copy to the `area` part of the screen
  */
 void sdl_display_flush2(lv_disp_drv_t * disp_drv, const lv_area_t * area, lv_color_t * color_p)
 {
@@ -633,6 +632,7 @@ static uint32_t keycode_to_ctrl_key(SDL_Keycode sdl_key)
 }
 
 
+#if LV_TICK_CUSTOM == 0
 /**
  * A task to measure the elapsed time for LVGL
  * @param data unused
@@ -649,6 +649,6 @@ static int tick_thread(void *data)
 
     return 0;
 }
-
+#endif
 
 #endif /*USE_MONITOR || USE_SDL*/

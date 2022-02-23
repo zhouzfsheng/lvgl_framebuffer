@@ -92,7 +92,7 @@ void fbdev_init(void)
         perror("Error: cannot open framebuffer device");
         return;
     }
-    LV_LOG_USER("The framebuffer device was opened successfully");
+    LV_LOG_INFO("The framebuffer device was opened successfully");
 
     // Make sure that the display is on.
     if (ioctl(fbfd, FBIOBLANK, FB_BLANK_UNBLANK) != 0) {
@@ -138,7 +138,7 @@ void fbdev_init(void)
     }
 #endif /* USE_BSD_FBDEV */
 
-    LV_LOG_USER("%dx%d, %dbpp", vinfo.xres, vinfo.yres, vinfo.bits_per_pixel);
+    LV_LOG_INFO("%dx%d, %dbpp", vinfo.xres, vinfo.yres, vinfo.bits_per_pixel);
 
     // Figure out the size of the screen in bytes
     screensize =  finfo.smem_len; //finfo.line_length * vinfo.yres;    
@@ -153,7 +153,7 @@ void fbdev_init(void)
     // Don't initialise the memory to retain what's currently displayed / avoid clearing the screen.
     // This is important for applications that only draw to a subsection of the full framebuffer.
 
-    LV_LOG_USER("The framebuffer device was mapped to memory successfully");
+    LV_LOG_INFO("The framebuffer device was mapped to memory successfully");
 
 }
 
@@ -166,7 +166,7 @@ void fbdev_exit(void)
  * Flush a buffer to the marked area
  * @param drv pointer to driver where this function belongs
  * @param area an area where to copy `color_p`
- * @param color_p an array of pixel to copy to the `area` part of the screen
+ * @param color_p an array of pixels to copy to the `area` part of the screen
  */
 void fbdev_flush(lv_disp_drv_t * drv, const lv_area_t * area, lv_color_t * color_p)
 {

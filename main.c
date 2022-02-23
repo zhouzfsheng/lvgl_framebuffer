@@ -3,8 +3,7 @@
 #include "lv_drivers/indev/evdev.h"
 #include "lvgl/examples/lv_examples.h"
 #include "evdev_mouse.h"
-//#include "lv_examples/lv_examples.h"
-#include "lv_demos/lv_demo.h"
+#include "lvgl/demos/lv_demos.h"
 #include <unistd.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -160,7 +159,7 @@ int main(void)
 
 	//lv_example_meter_1();
 	//lv_example_meter_2();
-	lv_example_meter_3();
+	//lv_example_meter_3();
 	//lv_example_meter_4();
 
 	while (1)
