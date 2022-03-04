@@ -159,7 +159,7 @@ int main(void)
 
 	//lv_example_meter_1();
 	//lv_example_meter_2();
-	lv_example_meter_3();
+	lv_example_meter_5();
 	//lv_example_meter_4();
 
 	while (1)
