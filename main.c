@@ -159,8 +159,16 @@ int main(void)
 
 	//lv_example_meter_1();
 	//lv_example_meter_2();
-	lv_example_meter_3();
+	//lv_example_meter_3();
 	//lv_example_meter_4();
+
+	// lv_example_label_1();
+	// lv_example_label_2();
+	// lv_example_label_3();
+	// lv_example_label_4();
+
+	lv_example_meter_5();
+	//lv_example_spinner_1();
 
 	while (1)
 	{
