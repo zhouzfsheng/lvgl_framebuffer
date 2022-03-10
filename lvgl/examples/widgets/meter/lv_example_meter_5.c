@@ -8,17 +8,36 @@ static void set_value(void * indic, int32_t v)
     lv_meter_set_indicator_end_value(meter, indic, v);
 }
 
+static void event_cb(lv_event_t * e)
+{
+    lv_event_code_t code = lv_event_get_code(e);
+
+    if(code == LV_EVENT_CLICKED) {
+        LV_LOG_USER("Clicked");
+    }
+    else if(code == LV_EVENT_VALUE_CHANGED) {
+        LV_LOG_USER("Toggled");
+    }
+}
 /**
  * A clock from a meter
  */
-void lv_example_meter_5(void)
+void GUI_Main_Init(lv_obj_t *pmain, lv_group_t *group)
 {
-    lv_obj_t *screen = lv_scr_act();
+    lv_obj_t *screen = pmain;
+	//lv_obj_set_size(screen, 300, 300);
+	lv_obj_set_pos(screen, 0, 0);
+	//lv_obj_align(m_main, NULL, LV_ALIGN_CENTER, 0, 0);
+	// lv_obj_add_style(screen, LV_OBJ_PART_MAIN, &page_style);
+
+	lv_group_add_obj( group, screen );
+
 
     meter = lv_meter_create(screen);
-    lv_obj_set_size(meter, 260, 260);
+    lv_obj_set_size(meter, 280, 280);
+	lv_obj_add_event_cb( meter, event_cb, LV_EVENT_ALL, NULL);
     lv_obj_center(meter);
-
+    //删除中心点
     lv_obj_remove_style(meter, NULL, LV_PART_INDICATOR);
 
     /*Create a scale for the minutes*/
@@ -77,6 +96,41 @@ void lv_example_meter_5(void)
     // lv_anim_set_time(&a, 600*720);    /*24 sec for 1 turn of the hour hand*/
     // lv_anim_set_values(&a, 0, 60);
     // lv_anim_start(&a);
+}
+
+#define APP_HEART	"HeartBeat"
+
+void GUI_Heart_Init(lv_obj_t *pmain, lv_group_t *group)
+{
+	lv_obj_t *m_heart = lv_obj_create(pmain);
+	lv_obj_set_style_bg_color(m_heart, lv_color_hex(0x343247), 0);
+    lv_obj_set_pos(m_heart, 0, 300);
+	lv_obj_set_size(m_heart, 260, 260);
+	lv_group_add_obj( group, m_heart );
+	lv_obj_add_event_cb( m_heart, event_cb, LV_EVENT_ALL, NULL);
+
+	lv_obj_t *lv_title_heart_label = lv_label_create(m_heart);
+	lv_label_set_text(lv_title_heart_label,APP_HEART);
+	lv_obj_center(lv_title_heart_label);
+
+	// lv_obj_t *lv_title_heart_label = lv_label_create(pmain);
+ //    lv_obj_set_pos(lv_title_heart_label, 0, 300);
+	// lv_obj_set_size(lv_title_heart_label, 300, 300);
+	// lv_obj_add_event_cb( lv_title_heart_label, event_cb, LV_EVENT_ALL, NULL);
+	// lv_label_set_text(lv_title_heart_label,APP_HEART);
+
+}
+
+void lv_example_meter_5(void)
+{
+    lv_obj_t * lv_main = lv_obj_create(lv_scr_act());
+    lv_obj_set_size(lv_main, 300, 300);
+    lv_obj_center(lv_main);
+
+    lv_obj_set_style_bg_color(lv_main, lv_color_hex(0x343247), 0);
+
+    GUI_Main_Init(lv_main,NULL);
+    GUI_Heart_Init(lv_main, NULL);
 }
 
 #endif

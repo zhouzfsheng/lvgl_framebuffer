@@ -2,6 +2,7 @@
 #include "lv_drivers/display/fbdev.h"
 #include "lv_drivers/indev/evdev.h"
 #include "lvgl/examples/lv_examples.h"
+#include "lvgl/examples/others/gridnav/lv_example_gridnav.h"
 #include "evdev_mouse.h"
 #include "lvgl/demos/lv_demos.h"
 #include <unistd.h>
@@ -138,7 +139,7 @@ int main(void)
 	//lv_demo_keypad_encoder();
 	//lv_demo_printer();
 	//lv_demo_stress();
-	//lv_demo_music();
+	// lv_demo_music();
 	//lv_ex_get_started_1();
 	//lv_ex_get_started_2();
 	//lv_ex_get_started_3();
@@ -169,7 +170,26 @@ int main(void)
 
 	lv_example_meter_5();
 	//lv_example_spinner_1();
+	// lv_example_tabview_1();
+	// lv_example_tabview_2();
 
+
+	// lv_example_gridnav_1();
+	// lv_example_gridnav_2();
+	// lv_example_gridnav_3();
+	// lv_example_gridnav_4();
+
+	//lv_example_flex_1();
+	// lv_example_grid_2();
+	// lv_example_event_2();
+	// lv_example_event_3();
+	// lv_example_event_4();
+	//lv_example_monkey_2();
+	//lv_example_monkey_3();
+
+
+	//lv_example_scroll_1();
+	//lv_example_scroll_3();
 	while (1)
 	{
 		/* Periodically call the lv_task handler.

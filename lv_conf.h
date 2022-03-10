@@ -654,13 +654,13 @@ uint32_t custom_tick_get();
  *----------*/
 
 /*1: Enable API to take snapshot for object*/
-#define LV_USE_SNAPSHOT 0
+#define LV_USE_SNAPSHOT 1
 
 /*1: Enable Monkey test*/
-#define LV_USE_MONKEY   0
+#define LV_USE_MONKEY   1
 
 /*1: Enable grid navigation*/
-#define LV_USE_GRIDNAV  0
+#define LV_USE_GRIDNAV  1
 
 /*==================
 * EXAMPLES
