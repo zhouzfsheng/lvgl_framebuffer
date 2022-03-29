@@ -3,6 +3,17 @@
 
 static lv_obj_t * meter;
 
+lv_obj_t * lv_main;
+
+
+LV_IMG_DECLARE(img_benchmark_cogwheel_indexed16);
+LV_IMG_DECLARE(img_benchmark_cogwheel_argb);
+
+static lv_style_t style_common;
+static bool opa_mode = true;
+
+void GUI_Setting_Init(lv_obj_t *pmain, lv_group_t *group);
+void GUI_Heart_Init(lv_obj_t *pmain, lv_group_t *group);
 static void set_value(void * indic, int32_t v)
 {
     lv_meter_set_indicator_end_value(meter, indic, v);
@@ -14,6 +25,9 @@ static void event_cb(lv_event_t * e)
 
     if(code == LV_EVENT_CLICKED) {
         LV_LOG_USER("Clicked");
+
+        GUI_Heart_Init(lv_main, NULL);
+        GUI_Setting_Init(lv_main, NULL);
     }
     else if(code == LV_EVENT_VALUE_CHANGED) {
         LV_LOG_USER("Toggled");
@@ -105,7 +119,7 @@ void GUI_Heart_Init(lv_obj_t *pmain, lv_group_t *group)
 	lv_obj_t *m_heart = lv_obj_create(pmain);
 	lv_obj_set_style_bg_color(m_heart, lv_color_hex(0x343247), 0);
     lv_obj_set_pos(m_heart, 0, 300);
-	lv_obj_set_size(m_heart, 260, 260);
+	lv_obj_set_size(m_heart, 280, 280);
 	lv_group_add_obj( group, m_heart );
 	lv_obj_add_event_cb( m_heart, event_cb, LV_EVENT_ALL, NULL);
 
@@ -121,16 +135,67 @@ void GUI_Heart_Init(lv_obj_t *pmain, lv_group_t *group)
 
 }
 
+#define APP_SETTING   "Setting"
+
+#define IMG_WIDH        100
+#define IMG_HEIGHT      100
+#define IMG_NUM         LV_MAX((LV_HOR_RES * LV_VER_RES) / 5 / IMG_WIDH / IMG_HEIGHT, 1)
+#define IMG_ZOOM_MIN    128
+#define IMG_ZOOM_MAX    (256 + 64)
+
+
+
+void GUI_Setting_Init(lv_obj_t *pmain, lv_group_t *group)
+{
+    lv_obj_t *m_setting = lv_obj_create(pmain);
+    lv_obj_set_style_bg_color(m_setting, lv_color_hex(0x343247), 0);
+    lv_obj_set_pos(m_setting, 0, 0);//位置
+    lv_obj_set_size(m_setting, 280, 280);//大小
+    lv_group_add_obj( group, m_setting );
+    lv_obj_add_event_cb( m_setting, event_cb, LV_EVENT_ALL, NULL);
+
+    // lv_style_reset(&style_common);
+    // lv_style_set_img_opa(&style_common, opa_mode ? LV_OPA_50 : LV_OPA_COVER);
+
+    lv_obj_t * obj = lv_img_create(m_setting);
+    //lv_obj_set_size(obj, 200, 200);
+    // lv_obj_remove_style_all(obj);
+    // lv_obj_add_style(obj, &style_common, 0);
+    lv_img_set_src(obj, &img_benchmark_cogwheel_argb);
+    lv_obj_center(obj);
+
+    lv_obj_t *lv_title_setting_label = lv_label_create(m_setting);
+    lv_obj_remove_style_all(lv_title_setting_label);
+
+    //引用样式会加载新的样式颜色
+    lv_obj_add_style(lv_title_setting_label, &style_common, 0);
+
+    lv_label_set_text(lv_title_setting_label,APP_SETTING);
+    lv_obj_set_pos(lv_title_setting_label,90,180);//位置
+    // lv_obj_t *lv_title_heart_label = lv_label_create(pmain);
+ //    lv_obj_set_pos(lv_title_heart_label, 0, 300);
+    // lv_obj_set_size(lv_title_heart_label, 300, 300);
+    // lv_obj_add_event_cb( lv_title_heart_label, event_cb, LV_EVENT_ALL, NULL);
+    // lv_label_set_text(lv_title_heart_label,APP_HEART);
+
+}
+
+
 void lv_example_meter_5(void)
 {
-    lv_obj_t * lv_main = lv_obj_create(lv_scr_act());
-    lv_obj_set_size(lv_main, 300, 300);
+    lv_main = lv_obj_create(lv_scr_act());
+    lv_obj_set_size(lv_main, 324, 324);
     lv_obj_center(lv_main);
+
+    //定义样式颜色，引用样式会加载新的样式颜色
+    lv_style_init(&style_common);
+    //lv_style_set_text_opa(&style_common, LV_OPA_30);//透明度
+    lv_style_set_text_color(&style_common, lv_color_white());//字体颜色
 
     lv_obj_set_style_bg_color(lv_main, lv_color_hex(0x343247), 0);
 
     GUI_Main_Init(lv_main,NULL);
-    GUI_Heart_Init(lv_main, NULL);
+    //GUI_Heart_Init(lv_main, NULL);
 }
 
 #endif

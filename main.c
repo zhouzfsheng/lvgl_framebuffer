@@ -180,7 +180,7 @@ int main(void)
 	// lv_example_gridnav_4();
 
 	//lv_example_flex_1();
-	// lv_example_grid_2();
+	//lv_example_grid_2();
 	// lv_example_event_2();
 	// lv_example_event_3();
 	// lv_example_event_4();
