@@ -1,3 +1,6 @@
-# lvgl_framebuffer
+# LVGL Watch UI
 
-show Watch UI
+LVGL Watch UI
+
+
+
