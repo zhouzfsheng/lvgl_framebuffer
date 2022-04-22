@@ -1,4 +1,4 @@
-name: lvgl-watch
+name: lvgl_framebuffer
 
 on:
   push:
